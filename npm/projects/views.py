@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from django.contrib import messages
 import validators
-from .models import Project,Remarks
+from .models import Project,Remarks,Contact
 import re
 
 
@@ -15,10 +16,13 @@ def Index(request):
     print(sort_by)
     # proList = Project.objects.all()
     # proList = Project.objects.order_by('title')
-    if sort_by:
+
+    if sort_by=='pub_on' or sort_by=='updated_on':
+        proList=Project.objects.order_by('-updated_on')
+    elif sort_by:
         proList = Project.objects.order_by(sort_by)
     else:
-        proList = Project.objects.all()    
+        proList = Project.objects.all()
     params={
         "data":proList
     }
@@ -26,7 +30,7 @@ def Index(request):
 
 def Search(request):
     searched=request.POST['searched']
-    proList=Project.objects.filter(title__contains=searched)    
+    proList=Project.objects.filter(title__contains=searched)
     params={
         "searched":searched,
         "data":proList
@@ -44,14 +48,14 @@ def Delete(request,id):
         project.delete()
     else:
         messages.add_message(request, messages.ERROR, 'You cannot delete this Project')
-        return redirect("/projects/")    
-    
+        return redirect("/projects/")
+
     messages.add_message(request, messages.SUCCESS, 'Project deleted successfully.')
     return redirect("/projects/")
 
 
 def RemarksForm(request,id):
-    try:    
+    try:
         rating = request.POST['rating']
         remarks = request.POST['remarks']
         author = request.user
@@ -79,7 +83,7 @@ def Edit(request,id):
         sec = request.POST.get("sec")
         git_link = request.POST.get("git_link")
         live_link = request.POST.get("live_link")
-        
+
         if(request.FILES):
             screenshot = request.FILES["screenshot"]
         submitted_by = request.user # user should be logined in
@@ -101,7 +105,7 @@ def Edit(request,id):
         if(request.user is None):
             messages.add_message(request, messages.ERROR, 'You are not Loggedin. ')
             return redirect("/members/login/")
-        
+
         # validation over
         try:
             project = Project.objects.get(id=id)
@@ -123,7 +127,7 @@ def Edit(request,id):
         except Exception as e:
                 messages.add_message(request, messages.ERROR, e)
                 return redirect("/projects/")
-            
+
     else:
         messages.add_message(request, messages.ERROR, 'You are not allowed here')
         return redirect("/projects/")
@@ -157,7 +161,7 @@ def Create(request):
         if(request.user is None):
             messages.add_message(request, messages.ERROR, 'You are not allowed here')
             return redirect("/project/create/")
-        
+
         # validation over
         try:
             NewProject = Project(
@@ -178,8 +182,24 @@ def Create(request):
 
                 messages.add_message(request, messages.ERROR, e)
                 return redirect("/projects/")
-                
+
         return render(request,"projects/index.html")
     else:
         messages.add_message(request, messages.ERROR, 'You are not allowed here')
         return redirect("/")
+
+
+
+
+def contactus(req):
+    return render(req,"projects\contactus.html")
+
+def contactSubmit(req):
+    email=req.POST.get("email")
+    name=req.POST.get("name")
+    tel=req.POST.get("phone")
+    desc=req.POST.get("desc")
+    File=req.POST.get("screenshot")
+    newContact=Contact(email=email,name=name,desc=desc,phone=tel,screenshot=File)
+    newContact.save()
+    return HttpResponse("Thank You For your Feedback :)")

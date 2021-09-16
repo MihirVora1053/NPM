@@ -11,7 +11,9 @@
 			integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
 			crossorigin="anonymous"
 		/>
-	
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2&display=swap" rel="stylesheet">
+
+  
 			
       <style>
           :root {
@@ -102,7 +104,14 @@ body {
   color: #777;
 }
 
-
+body{
+  background: #FF5F6D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+*{
+      font-family: 'Baloo Thambi 2', cursive;
+    }
 </style>
 			
 		
@@ -125,9 +134,9 @@ body {
   <form class="form-signin" action="/members/signupsubmit/" method="POST">
           {% csrf_token %}
             <div class="text-center mb-4">
-              <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-              <h1 class="h3 mb-3 font-weight-normal">SignUp</h1>
-              <p>Signup to continue with blogs</p>
+              <img class="mb-4" src="https://images.squarespace-cdn.com/content/v1/530053f2e4b008058a47766d/1588772504604-RJX4N891AHP1DLOUOFT1/mvp+logo" alt="" width="100" height="80">
+              <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+              <p><b>Signup to continue with MVP</b></p>
             </div>
       
             <div class="form-label-group">

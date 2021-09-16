@@ -1,49 +1,19 @@
 {% extends "html/basic.html" %}
  {% block title %} Projects {% endblock title%}
-  {% block css %} 
+  {% block css %}
     .custom-list .card-title,.custom-list .card-subtitle ,.custom-list .card-text {
   text-transform: capitalize;
 
 }
 
 <style>
-			{% comment %} .post-comments{
-			background-color: rgb(238, 234, 234);
-			padding: 15px;
-			border-bottom: 1px solid #c0c0c0;
-			margin: 5px 0;
-			}
-			.remarks-con{
-				list-style: none;
-				margin: 0;
-			padding: 15px 0 0 0;			}
-			.remarks-con li:last-child .post-comments{
-			
-			border-bottom: 0;
-			}
-			.post-comments p{
-		margin: 0;
-			}
-			.post-comments p.meta{
-		margin: 0;
-		margin-bottom: 7.5px;
-	padding-bottom: 7.5px;
-		
-			}
-			span.custom-ar{
-			  margin: 0 4.5px;
-			  font-size: 20px;
-			  font-weight: 800;
-
-			} {% endcomment %}
-
 
 .custom-list .card{
   padding: 25px;
   margin: 10px 0;
 }
 
-  {% endblock css %} 
+  {% endblock css %}
 {% block body %}
 
   {% if messages %}
@@ -87,14 +57,14 @@
         </form>
       </div>
       <div class="col-2">
-        <form class="d-flex" action="/projects  /" method="GET">
+        <form class="d-flex" action="/projects/" method="GET">
           <select Class="form-select" name="sort_by" id="">
             <option value="">Default</option>
             <option value="submitted_by">Author</option>
             <option value="title">Title</option>
             <option value="pub_on">Created On</option>
             <option value="updated_on">Updated On</option>
-          </select>  
+          </select>
           <button class="btn btn-secondary ms-1" type="submit">Sort</button>
         </form>
       </div>
@@ -168,10 +138,10 @@
 
 
 
-        
-        
-        
-        
+
+
+
+
           <div class="modal fade" id="askModal_{{d.id}}" tabindex="-1" aria-labelledby="askModal_{{d.id}}" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -208,7 +178,7 @@
                         We'll never share your email with anyone else.
                       </div>
                     </div>
-                
+
                     <div class="mb-3">
                       <label for="input1" class="form-label">Title</label>
                       <input placeholder="Enter Title of your project" type="text" class="form-control" id="input1"
@@ -219,7 +189,7 @@
                       <input placeholder="Enter Description of your project" type="text" class="form-control" id="input3"
                         aria-describedby="input3Help" name="desc" required value="{{d.desc}}" />
                     </div>
-                
+
                     <div class="mb-3">
                       <label for="input5" class="form-label">Enrollment number</label>
                       <input maxlength="10" minlength="10" min="10" max="10" placeholder="Enter your Enrollment number"
@@ -255,16 +225,16 @@
                       <input placeholder="Enter Live Link of your project" type="text" class="form-control" id="input4"
                         aria-describedby="input4Help" name="live_link" value="{{d.live_link}}" />
                     </div>
-                
+
                     <div class="mb-3">
                       <label for="formFile"  class="form-label">Screenshots (Optional)</label>
                       <input class="form-control" name="screenshot" type="file" id="formFile">
-                    </div>        
-                  </div> 
+                    </div>
+                  </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button> 
-                  </div> 
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -350,7 +320,7 @@
                     </div>
                     </li>
                 {% endfor %}
-              {% endif %}      
+              {% endif %}
             </ul>
           </div>
         </div>
